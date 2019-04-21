@@ -1,0 +1,51 @@
+
+
+
+在哪里可以使用Lambda？
+
+
+
+
+
+
+以下哪些是使用Lambda表达式的有效方式？
+
+
+(1) execute(() -> {});
+ public void execute(Runnable r){
+ r.run();
+ }
+
+
+(2) public Callable<String> fetch() {
+ return () -> "Tricky example ;-)";
+ }
+
+
+(3) Predicate<Apple> p = (Apple a) -> a.getWeight();
+
+
+答案：只有1和2是有效的。
+
+
+第一个例子有效，是因为Lambda() -> {}具有签名() -> void，这和Runnable中的
+抽象方法run的签名相匹配。请注意，此代码运行后什么都不会做，因为Lambda是空的！
+
+
+第二个例子也是有效的。事实上，fetch方法的返回类型是Callable<String>。
+Callable<String>基本上就定义了一个方法，签名是() -> String，其中T被String代替
+了。因为Lambda() -> "Trickyexample;-)"的签名是() -> String，所以在这个上下文
+中可以使用Lambda。
+
+
+第三个例子无效，因为Lambda表达式(Apple a) -> a.getWeight()的签名是(Apple) ->
+Integer，这和Predicate<Apple>:(Apple) -> boolean中定义的test方法的签名不同
+
+
+@FunctionalInterface又是怎么回事？
+如果你去看看新的Java API，会发现函数式接口带有@FunctionalInterface的标注（3.4
+节中会深入研究函数式接口，并会给出一个长长的列表）。这个标注用于表示该接口会设计成
+一个函数式接口。如果你用@FunctionalInterface定义了一个接口，而它却不是函数式接
+口的话，编译器将返回一个提示原因的错误。例如，错误消息可能是“Multiple non-overriding
+abstract methods found in interface Foo”，表明存在多个抽象方法。请注意，@FunctionalInterface不是必需的，但对于为此设计的接口而言，使用它是比较好的做法。它就像是@Override
+标注表示方法被重写了
