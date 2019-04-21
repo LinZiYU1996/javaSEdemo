@@ -1,0 +1,11 @@
+
+
+
+你将如何利用流来筛选前两个荤菜呢？
+答案：你可以把filter和limit复合在一起来解决这个问题，并用collect(toList())
+将流转换成一个列表。
+List<Dish> dishes =
+ menu.stream()
+ .filter(d -> d.getType() == Dish.Type.MEAT)
+ .limit(2)
+ .collect(toList());
