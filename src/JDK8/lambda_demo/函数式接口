@@ -1,0 +1,43 @@
+
+
+
+函数式接口就是只定义一个抽象方法的接口。你已经知道了Java API中的一些
+其他函数式接口，
+
+
+public interface Comparator<T> {
+ int compare(T o1, T o2);
+}
+
+
+public interface Runnable{
+ void run();
+}
+
+
+public interface ActionListener extends EventListener{
+ void actionPerformed(ActionEvent e);
+}
+
+
+public interface Callable<V>{
+ V call();
+}
+
+
+public interface PrivilegedAction<V>{
+ V run();
+}
+
+用函数式接口可以干什么呢？Lambda表达式允许你直接以内联的形式为函数式接口的抽象
+
+方法提供实现，并把整个表达式作为函数式接口的实例（具体说来，是函数式接口一个具体实现
+的实例）。你用匿名内部类也可以完成同样的事情，只不过比较笨拙：需要提供一个实现，然后
+再直接内联将它实例化
+
+
+
+
+
+
+

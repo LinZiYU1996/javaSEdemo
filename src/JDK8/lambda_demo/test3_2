@@ -1,0 +1,26 @@
+
+
+
+
+
+函数式接口
+下面哪些接口是函数式接口？
+public interface Adder{
+ int add(int a, int b);
+}
+
+
+public interface SmartAdder extends Adder{
+ int add(double a, double b);
+}
+
+
+public interface Nothing{
+}
+
+
+答案：只有Adder是函数式接口。
+SmartAdder不是函数式接口，因为它定义了两个叫作add的抽象方法（其中一个是从
+Adder那里继承来的）。
+Nothing也不是函数式接口，因为它没有声明抽象方法
+
