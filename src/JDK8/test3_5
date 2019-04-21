@@ -1,0 +1,17 @@
+
+
+
+
+
+
+类型检查——为什么下面的代码不能编译呢？
+你该如何解决这个问题呢？
+Object o = () -> {System.out.println("Tricky example"); };
+答案：Lambda表达式的上下文是Object（目标类型）。但Object不是一个函数式接口。
+为了解决这个问题，你可以把目标类型改成Runnable，它的函数描述符是() -> void：
+Runnable r = () -> {System.out.println("Tricky example"); };
+
+
+
+
+

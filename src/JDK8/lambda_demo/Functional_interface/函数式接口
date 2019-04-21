@@ -1,0 +1,19 @@
+
+
+
+函数式接口定义且只定义了一个抽象方法。函数式接口很有用，
+因为抽象方法的签名可以描述Lambda表达式的签名。函数式接口的抽象方法的签名称为函数描
+述符。所以为了应用不同的Lambda表达式，你需要一套能够描述常见函数描述符的函数式接口。
+Java API中已经有了几个函数式接口，比如Comparable、Runnable和Callable。
+
+
+Java 8的库设计师帮你在java.util.function包中引入了几个新的函数式接口。我们接下
+来会介绍Predicate、Consumer和Function，
+
+
+
+
+
+
+
+
