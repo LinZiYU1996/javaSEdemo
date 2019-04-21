@@ -1,0 +1,5 @@
+编写一个prettyPrintApple方法，它接受一个Apple的List，并可以对它参数化，以
+多种方式根据苹果生成一个String输出（有点儿像多个可定制的toString方法）。例如，你
+可以告诉 prettyPrintApple 方法，只打印每个苹果的重量。此外，你可以让
+prettyPrintApple方法分别打印每个苹果，然后说明它是重的还是轻的。解决方案和我们
+前面讨论的筛选的例子类似。

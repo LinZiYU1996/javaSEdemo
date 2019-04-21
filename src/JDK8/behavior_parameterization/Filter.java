@@ -26,9 +26,19 @@ public class Filter {
         return result;
     }
 
+
+
+
+
+
+
     public static void main(String[] args) {
         List<Apple> apples = new ArrayList<>();
         List<Apple> redAndHeavyApples = filterApples(apples,new AppleRedAndHeavyPredicate());
+
+
+        //用Lambda表达式重写为下面的样子
+        List<Apple> result = filterApples(apples,(Apple a) -> "red".equals(a.getColor()));
     }
 
 }
