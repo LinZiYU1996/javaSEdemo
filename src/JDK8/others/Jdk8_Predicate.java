@@ -1,4 +1,4 @@
-package JDK8;
+package JDK8.others;
 
 
 import java.util.Arrays;
