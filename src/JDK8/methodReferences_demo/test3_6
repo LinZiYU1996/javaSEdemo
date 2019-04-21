@@ -1,0 +1,25 @@
+
+
+
+方法引用
+下列Lambda表达式的等效方法引用是什么？
+(1) Function<String, Integer> stringToInteger =
+ (String s) -> Integer.parseInt(s);
+
+
+(2) BiPredicate<List<String>, String> contains =
+ (list, element) -> list.contains(element);
+答案如下。
+
+
+(1) 这个Lambda表达式将其参数传给了Integer的静态方法parseInt。这种方法接受一
+个需要解析的String，并返回一个Integer。因此，可以使用图3-5中的办法➊（Lambda表达
+式调用静态方法）来重写Lambda表达式，如下所示：
+Function<String, Integer> stringToInteger = Integer::parseInt;
+
+
+(2) 这个Lambda使用其第一个参数，调用其contains方法。由于第一个参数是List类型
+的，你可以使用图3-5中的办法➋，如下所示：
+BiPredicate<List<String>, String> contains = List::contains;
+这是因为，目标类型描述的函数描述符是 (List<String>,String) -> boolean，而
+List::contains可以被解包成这个函数描述符。

@@ -1,0 +1,14 @@
+
+构造函数引用
+你已经看到了如何将有零个、一个、两个参数的构造函数转变为构造函数引用。那要怎么
+样才能对具有三个参数的构造函数，比如Color(int, int, int)，使用构造函数引用呢？
+
+
+答案：你看，构造函数引用的语法是ClassName::new，那么在这个例子里面就是
+Color::new。但是你需要与构造函数引用的签名匹配的函数式接口。但是语言本身并没有提
+供这样的函数式接口，你可以自己创建一个：
+public interface TriFunction<T, U, V, R>{
+ R apply(T t, U u, V v);
+}
+现在你可以像下面这样使用构造函数引用了：
+TriFunction<Integer, Integer, Integer, Color> colorFactory = Color::new;

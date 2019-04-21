@@ -1,0 +1,37 @@
+
+方法引用主要有三类。
+(1) 指向静态方法的方法引用（例如Integer的parseInt方法，写作Integer::parseInt）
+
+(2) 指 向 任意类型实例方法 的方法引用（例如 String 的 length 方法，写作
+String::length）。
+
+
+(3) 指向现有对象的实例方法的方法引用（假设你有一个局部变量expensiveTransaction
+用于存放Transaction类型的对象，它支持实例方法getValue，那么你就可以写expensiveTransaction::getValue）。
+
+
+
+第二种和第三种方法引用可能乍看起来有点儿晕。类似于String::length的第二种方法引
+用的思想就是你在引用一个对象的方法，而这个对象本身是Lambda的一个参数。例如，Lambda
+表达式(String s) -> s.toUppeCase()可以写作String::toUpperCase。但第三种方法引用
+指的是，你在Lambda中调用一个已经存在的外部对象中的方法。例如，Lambda表达式
+()->expensiveTransaction.getValue()可以写作expensiveTransaction::getValue。
+
+
+请注意，还有针对构造函数、数组构造函数和父类调用（super-call）的一些特殊形式的方法
+引用。让我们举一个方法引用的具体例子吧。比方说你想要对一个字符串的List排序，忽略大
+小写。List的sort方法需要一个Comparator作为参数。你在前面看到了，Comparator描述了
+一个具有(T, T) -> int签名的函数描述符。你可以利用String类中的compareToIgnoreCase
+方法来定义一个Lambda表达式（注意compareToIgnoreCase是String类中预先定义的）。
+
+
+List<String> str = Arrays.asList("a","b","A","B");
+str.sort((s1, s2) -> s1.compareToIgnoreCase(s2));
+Lambda表达式的签名与Comparator的函数描述符兼容。利用前面所述的方法，这个例子可
+以用方法引用改写成下面的样子：
+List<String> str = Arrays.asList("a","b","A","B");
+str.sort(String::compareToIgnoreCase);
+请注意，编译器会进行一种与Lambda表达式类似的类型检查过程，来确定对于给定的函数
+式接口，这个方法引用是否有效：方法引用的签名必须和上下文类型匹配
+
+
