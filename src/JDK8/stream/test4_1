@@ -1,0 +1,13 @@
+
+
+中间操作与终端操作
+在下列流水线中，你能找出中间操作和终端操作吗？
+long count = menu.stream()
+ .filter(d -> d.getCalories() > 300)
+ .distinct()
+ .limit(3)
+ .count();
+答案：流水线中最后一个操作count返回一个long，这是一个非Stream的值。因此它是
+一个终端操作。所有前面的操作，filter、distinct、limit，都是连接起来的，并返回一
+个Stream，因此它们是中间操作。
+
