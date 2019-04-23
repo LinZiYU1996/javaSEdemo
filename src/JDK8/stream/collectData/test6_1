@@ -1,0 +1,27 @@
+
+用reducing连接字符串
+以下哪一种reducing收集器的用法能够合法地替代joining收集器（如6.2.3节用法）？
+String shortMenu = menu.stream().map(Dish::getName).collect(joining());
+(1) String shortMenu = menu.stream().map(Dish::getName).collect( reducing ( (s1, s2) -> s1 + s2 ) ).get();
+
+(2) String shortMenu = menu.stream() .collect( reducing( (d1, d2) -> d1.getName() + d2.getName() ) ).get();
+
+(3) String shortMenu = menu.stream() .collect( reducing( "",Dish::getName, (s1, s2) -> s1 + s2 ) );
+答案：语句1和语句3是有效的，语句2无法编译。
+
+(1) 这会将每道菜转换为菜名，就像原先使用joining收集器的语句一样。然后用一个
+String作为累加器归约得到的字符串流，并将菜名逐个连接在它后面。
+
+(2) 这无法编译，因为reducing接受的参数是一个BinaryOperator<t>，也就是一个
+BiFunction<T,T,T>。这就意味着它需要的函数必须能接受两个参数，然后返回一个相同类
+型的值，但这里用的Lambda表达式接受的参数是两个菜，返回的却是一个字符串。
+
+(3) 这会把一个空字符串作为累加器来进行归约，在遍历菜肴流时，它会把每道菜转换成
+菜名，并追加到累加器上。请注意，我们前面讲过，reducing要返回一个Optional并不需
+要三个参数，因为如果是空流的话，它的返回值更有意义——也就是作为累加器初始值的空字符串。
+
+
+请注意，虽然语句1和语句3都能够合法地替代joining收集器，它们在这里是用来展示我
+们为何可以（至少在概念上）把reducing看作本章中讨论的所有其他收集器的概括。然而就
+实际应用而言，不管是从可读性还是性能方面考虑，我们始终建议使用joining收集器。
+
