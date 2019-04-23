@@ -1,0 +1,23 @@
+
+
+
+使用partitioningBy
+我们已经看到，和groupingBy收集器类似，partitioningBy收集器也可以结合其他收
+集器使用。尤其是它可以与第二个partitioningBy收集器一起使用来实现多级分区。以下多
+级分区的结果会是什么呢？
+(1) menu.stream().collect(partitioningBy(Dish::isVegetarian,
+ partitioningBy (d -> d.getCalories() > 500)));
+(2) menu.stream().collect(partitioningBy(Dish::isVegetarian,
+ partitioningBy (Dish::getType)));
+(3) menu.stream().collect(partitioningBy(Dish::isVegetarian,
+ counting()));
+答案如下。
+(1) 这是一个有效的多级分区，产生以下二级Map：
+{ false={false=[chicken, prawns, salmon], true=[pork, beef]},
+ true={false=[rice, season fruit], true=[french fries, pizza]}}
+(2) 这无法编译，因为partitioningBy需要一个谓词，也就是返回一个布尔值的函数。
+方法引用Dish::getType不能用作谓词。
+(3) 它会计算每个分区中项目的数目，得到以下Map：
+{false=5, true=4}
+
+
