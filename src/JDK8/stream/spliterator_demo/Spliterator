@@ -1,0 +1,32 @@
+
+
+
+
+Spliterator是Java 8中加入的另一个新接口；这个名字代表“可分迭代器”（splitable
+iterator）。和Iterator一样，Spliterator也用于遍历数据源中的元素，但它是为了并行执行
+而设计的。虽然在实践中可能用不着自己开发Spliterator，但了解一下它的实现方式会让你
+对并行流的工作原理有更深入的了解。Java 8已经为集合框架中包含的所有数据结构提供了一个
+默认的Spliterator实现。集合实现了Spliterator接口，接口提供了一个spliterator方法。
+这个接口定义了若干方法，
+
+
+
+public interface Spliterator<T> {
+ boolean tryAdvance(Consumer<? super T> action);
+ Spliterator<T> trySplit();
+ long estimateSize();
+ int characteristics();
+}
+
+
+
+与往常一样，T是Spliterator遍历的元素的类型。tryAdvance方法的行为类似于普通的
+Iterator，因为它会按顺序一个一个使用Spliterator中的元素，并且如果还有其他元素要遍
+历就返回true。但trySplit是专为Spliterator接口设计的，因为它可以把一些元素划出去分
+给第二个Spliterator（由该方法返回），让它们两个并行处理。Spliterator还可通过
+estimateSize方法估计还剩下多少元素要遍历，因为即使不那么确切，能快速算出来是一个值
+也有助于让拆分均匀一点
+
+
+
+
