@@ -1,0 +1,29 @@
+
+
+
+removeIf
+这个测验里，假设你是Java语言和API的一个负责人。你收到了关于removeIf方法的很多
+请求，希望能为ArrayList、TreeSet、LinkedList以及其他集合类型添加removeIf方法。
+removeIf方法的功能是删除满足给定谓词的所有元素。你的任务是找到添加这个新方法、优
+化Collection API的最佳途径。
+答案：改进Collection API破坏性最大的方式是什么？你可以把removeIf的实现直接复制
+到Collection API的每个实体类中，但这种做法实际是在对Java界的犯罪。还有其他的方式吗？
+你知道吗，所有的Collection类都实现了一个名为java.util.Collection的接口。太好
+了，那么我们可以在这里添加一个方法？是的！你只需要牢记，默认方法是一种以源码兼容方
+式向接口内添加实现的方法。这样实现Collction的所有类（包括并不隶属Collection API的
+用户扩展类）都能使用removeIf的默认实现。removeIf的代码实现如下（它实际就是Java 8
+Collection API的实现）。它是Collection接口的一个默认方法：
+default boolean removeIf(Predicate<? super E> filter) {
+ boolean removed = false;
+ Iterator<E> each = iterator();
+ while(each.hasNext()) {
+ if(filter.test(each.next())) {
+ each.remove();
+ removed = true;
+ }
+ }
+ return removed;
+}
+
+
+
