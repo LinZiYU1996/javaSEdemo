@@ -1,0 +1,31 @@
+
+
+
+牢记这些判断的规则
+我们在这个测验中继续复用之前的例子，唯一的不同在于D现在显式地覆盖了从A接口中
+继承的hello方法。你认为现在的输出会是什么呢？
+public class D implements A{
+ void hello(){
+ System.out.println("Hello from D");
+ }
+}
+public class C extends D implements B, A {
+ public static void main(String... args) {
+ new C().hello();
+ }
+}
+答案：由于依据规则(1)，父类中声明的方法具有更高的优先级，所以程序会打印输出“Hello
+from D”。
+注意，D的声明如下：
+public abstract class D implements A {
+ public abstract void hello();
+}
+这样的结果是，虽然在结构上，其他的地方已经声明了默认方法的实现，C还是必须提供
+自己的hello方法
+
+
+
+
+
+
+
