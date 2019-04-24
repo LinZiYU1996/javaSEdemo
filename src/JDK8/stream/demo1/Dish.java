@@ -1,7 +1,7 @@
 package JDK8.stream.demo1;
 
 
-
+import JDK8.stream.dividing.CalLevel;
 
 /*
 *
@@ -33,6 +33,14 @@ public class Dish {
     public Type getType() {
         return type;
     }
+    public CalLevel getCaloricLevel(){
+        if (this.getCalories() <= 400) return CalLevel.DIET;
+        else if (this.getCalories() <= 700) return CalLevel.NORMAL;
+        else return CalLevel.FAT;
+    }
+
+
+
     @Override
     public String toString() {
         return name;
