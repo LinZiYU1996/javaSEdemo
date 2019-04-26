@@ -3,8 +3,6 @@ package JDK8.learn_Optional.demo2;
 
 import JDK8.learn_Optional.Insurance;
 
-import java.util.Optional;
-
 /*
 *
  * @Author Mr.Lin
@@ -29,10 +27,10 @@ public class Test {
 //        使用Optional对象的filter方法，这段代码可以重构如下：
 
 
-        Optional<Insurance> optInsurance = new Optional<>();
-        optInsurance.filter(insurance ->
-                "CambridgeInsurance".equals(insurance.getName()))
-                .ifPresent(x -> System.out.println("ok"));
+//        Optional<Insurance> optInsurance = new Optional<>();
+//        optInsurance.filter(insurance ->
+//                "CambridgeInsurance".equals(insurance.getName()))
+//                .ifPresent(x -> System.out.println("ok"));
 
         //filter方法接受一个谓词作为参数。如果Optional对象的值存在，并且它符合谓词的条件，
         //filter方法就返回其值；否则它就返回一个空的Optional对象。
