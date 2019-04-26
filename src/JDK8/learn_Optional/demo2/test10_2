@@ -1,0 +1,19 @@
+
+
+
+
+对Optional对象进行过滤
+假设在我们的Person/Car/Insurance 模型中，Person还提供了一个方法可以取得
+Person对象的年龄，请使用下面的签名改写代码清单10-5中的getCarInsuranceName方法：
+public String getCarInsuranceName(Optional<Person> person, int minAge)
+找出年龄大于或者等于minAge参数的Person所对应的保险公司列表。
+答案：你可以对Optional封装的Person对象进行filter操作，设置相应的条件谓词，
+即如果person的年龄大于minAge参数的设定值，就返回该值，并将谓词传递给filter方法，
+代码如下所示。
+public String getCarInsuranceName(Optional<Person> person, int minAge) {
+ return person.filter(p -> p.getAge() >= minAge)
+ .flatMap(Person::getCar)
+ .flatMap(Car::getInsurance)
+ .map(Insurance::getName)
+ .orElse("Unknown");
+}
