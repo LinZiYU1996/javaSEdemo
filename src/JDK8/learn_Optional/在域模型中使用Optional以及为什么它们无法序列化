@@ -1,0 +1,19 @@
+
+
+
+Optional的设计初衷仅仅是要支持能返回Optional对象的语法。
+由于Optional类设计时就没特别考虑将其作为类的字段使用，所以它也并未实现
+Serializable接口。由于这个原因，如果你的应用使用了某些要求序列化的库或者框架，在
+域模型中使用Optional，有可能引发应用程序故障。然而，我们相信，通过前面的介绍，你
+已经看到用Optional声明域模型中的某些类型是个不错的主意，尤其是你需要遍历有可能全
+部或部分为空，或者可能不存在的对象时。如果你一定要实现序列化的域模型，作为替代方案，
+我们建议你像下面这个例子那样，提供一个能访问声明为Optional、变量值可能缺失的接口，
+代码清单如下：
+public class Person {
+ private Car car;
+ public Optional<Car> getCarAsOptional() {
+ return Optional.ofNullable(car);
+ }
+}
+
+
