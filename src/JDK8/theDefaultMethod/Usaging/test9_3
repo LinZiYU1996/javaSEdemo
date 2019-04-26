@@ -1,0 +1,25 @@
+
+
+
+
+
+几乎完全一样的函数签名
+这个测试中，我们假设接口A和B的声明如下所示：
+public interface A{
+ default Number getNumber(){
+ return 10;
+ }
+}
+public interface B{
+ default Integer getNumber(){
+ return 42;
+ }
+}
+类C的声明如下：
+public class C implements B, A {
+ public static void main(String... args) {
+ System.out.println(new C().getNumber());
+ }
+}
+这个程序的会打印输出什么呢？
+答案：类C无法判断A或者B到底哪一个更加具体。这就是类C无法通过编译的原因。

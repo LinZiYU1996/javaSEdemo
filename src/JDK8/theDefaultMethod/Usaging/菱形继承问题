@@ -1,0 +1,37 @@
+
+
+
+
+
+
+public interface A{
+ default void hello(){
+ System.out.println("Hello from A");
+ }
+}
+public interface B extends A { }
+public interface C extends A { }
+public class D implements B, C {
+ public static void main(String... args) {
+ new D().hello();   //猜猜打印输出的是什么？
+ }
+}
+
+
+这种问题叫“菱形问题”，因为类的继承
+关系图形状像菱形。这种情况下类D中的默认方法到底继承自什么地方 ——源自B的默认方法，
+还是源自C的默认方法？实际上只有一个方法声明可以选择。只有A声明了一个默认方法。由于这
+个接口是D的父接口，代码会打印输出“Hello from A”
+
+
+
+
+如果一个类的默认方法使用相同的函数签名继承自多个接口，解决
+冲突的机制其实相当简单。你只需要遵守下面这三条准则就能解决所有可能的冲突。
+ 首先，类或父类中显式声明的方法，其优先级高于所有的默认方法。
+ 如果用第一条无法判断，方法签名又没有区别，那么选择提供最具体实现的默认方法的
+接口。
+ 最后，如果冲突依旧无法解决，你就只能在你的类中覆盖该默认方法，显式地指定在你
+的类中使用哪一个接口中的方法。
+
+
