@@ -3,6 +3,7 @@ package JDK8.learn_CompletableFuture.completableFuture_test;
 
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 /*
@@ -52,6 +53,34 @@ public class Shop {
             futurePrice.complete(price);  //需长时间计算的任务结束并得出结果时，设置 Future的返回值
         }).start();
         return futurePrice;  //无需等待还没结束的计算，直接返回Future对象
+    }
+
+    //创建了一个代表异步计算的CompletableFuture对象实例，它在计算完
+    //成时会包含计算的结果。接着，你调用fork创建了另一个线程去执行实际的价格计算工作，不
+    //等该耗时计算任务结束，直接返回一个Future实例。当请求的产品价格最终计算得出时，你可
+    //以使用它的complete方法，结束completableFuture对象的运行，并设置变量的值。很显然，
+    //这个新版Future的名称也解释了它所具有的特性
+
+    public static void doSomethingElse(){
+
+    }
+
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        Shop shop = new Shop();
+        long start = System.nanoTime();
+        Future<Double> futurePrice = shop.getPriceAsync("My Love");
+        long invotime = (System.nanoTime() - start) / 1_000_000;
+        System.out.println("after" + invotime + " msecs");
+        doSomethingElse();
+        double price = futurePrice.get();
+        System.out.println(" price is" + price);
+        long retriveTime = ((System.nanoTime() - start) / 1_000_000);
+        System.out.println("Price after " + retriveTime + " msecs");
+
+
+
+
+
     }
 
 
