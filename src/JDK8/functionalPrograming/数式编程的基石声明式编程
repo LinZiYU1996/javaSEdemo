@@ -1,0 +1,40 @@
+
+
+
+
+
+
+一般通过编程实现一个系统，有两种思考方式。一种专注于如何实现，比如：“首先做这个，
+紧接着更新那个，然后……”举个例子，如果你希望通过计算找出列表中最昂贵的事务，通常需
+要执行一系列的命令：从列表中取出一个事务，将其与临时最昂贵事务进行比较；如果该事务开
+销更大，就将临时最昂贵的事务设置为该事务；接着从列表中取出下一个事务，并重复上述操作。
+这种“如何做”风格的编程非常适合经典的面向对象编程，有些时候我们也称之为“命令式”
+编程，因为它的特点是它的指令和计算机底层的词汇非常相近，比如赋值、条件分支以及循环，
+就像下面这段代码：
+Transaction mostExpensive = transactions.get(0);
+if(mostExpensive == null)
+ throw new IllegalArgumentException("Empty list of transactions")
+for(Transaction t: transactions.subList(1, transactions.size())){
+ if(t.getValue() > mostExpensive.getValue()){
+ mostExpensive = t;
+ }
+}
+另一种方式则更加关注要做什么。你在第4章和第5章中已经看到，使用Stream API你可以指
+定下面这样的查询：
+Optional<Transaction> mostExpensive =
+ transactions.stream()
+ .max(comparing(Transaction::getValue));
+这个查询把最终如何实现的细节留给了函数库。我们把这种思想称之为内部迭代。它的巨大
+优势在于你的查询语句现在读起来就像是问题陈述，由于采用了这种方式，我们马上就能理解它
+的功能，比理解一系列的命令要简洁得多。
+采用这种“要做什么”风格的编程通常被称为声明式编程。你制定规则，给出了希望实现的
+目标，让系统来决定如何实现这个目标。它带来的好处非常明显，用这种方式编写的代码更加接
+近问题陈述了。
+
+
+
+
+
+
+
+
