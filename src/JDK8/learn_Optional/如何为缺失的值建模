@@ -1,0 +1,101 @@
+public class Person { 
+ private Car car; 
+ public Car getCar() { return car; } 
+} 
+public class Car { 
+ private Insurance insurance; 
+ public Insurance getInsurance() { return insurance; } 
+} 
+public class Insurance { 
+ private String name; 
+ public String getName() { return name; } 
+} 
+那么，下面这段代码存在怎样的问题呢？
+public String getCarInsuranceName(Person person) { 
+ return person.getCar().getInsurance().getName(); 
+}
+
+
+
+
+这段代码看起来相当正常，但是现实生活中很多人没有车。所以调用getCar方法的结果会
+怎样呢？在实践中，一种比较常见的做法是返回一个null引用，表示该值的缺失，即用户没有
+车。而接下来，对getInsurance的调用会返回null引用的insurance，这会导致运行时出现
+一个NullPointerException，终止程序的运行。但这还不是全部。如果返回的person值为null
+会怎样？如果getInsurance的返回值也是null，结果又会怎样？
+
+
+
+怎样做才能避免这种不期而至的NullPointerException呢？通常，你可以在需要的地方添
+加null的检查（过于激进的防御式检查甚至会在不太需要的地方添加检测代码），并且添加的方式
+往往各有不同。
+
+
+null-安全的第一种尝试：深层质疑
+public String getCarInsuranceName(Person person) {
+ if (person != null) {
+ Car car = person.getCar();
+ if (car != null) {
+ Insurance insurance = car.getInsurance();
+ if (insurance != null) {
+ return insurance.getName();
+  }
+  }
+  }
+  return "Unknown";
+ }
+
+
+
+ 这个方法每次引用一个变量都会做一次null检查，如果引用链上的任何一个遍历的解变量
+ 值为null，它就返回一个值为“Unknown”的字符串。
+
+
+
+ null-安全的第二种尝试：过多的退出语句
+
+
+ public String getCarInsuranceName(Person person) {
+  if (person == null) {
+  return "Unknown";
+  }
+  Car car = person.getCar();
+  if (car == null) {
+  return "Unknown";
+  }
+  Insurance insurance = car.getInsurance();
+  if (insurance == null) {
+  return "Unknown";
+  }
+  return insurance.getName();
+ }
+
+
+第二种尝试中，你试图避免深层递归的if语句块，采用了一种不同的策略：每次你遭遇null
+变量，都返回一个字符串常量“Unknown”。然而，这种方案远非理想，现在这个方法有了四个
+截然不同的退出点，使得代码的维护异常艰难。更糟的是，发生null时返回的默认值，即字符
+串“Unknown”在三个不同的地方重复出现——出现拼写错误的概率不小！当然，你可能会说，
+我们可以用把它们抽取到一个常量中的方式避免这种问题。
+进一步而言，这种流程是极易出错的；如果你忘记检查了那个可能为null的属性会怎样？
+通过这一章的学习，你会了解使用null来表示变量值的缺失是大错特错的
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
