@@ -1,0 +1,19 @@
+
+
+
+
+
+函数式编程的世界里，如果函数，比如Comparator.comparing，能满足下面任一要求就
+可以被称为高阶函数（higher-order function）：
+ 接受至少一个函数作为参数
+ 返回的结果是一个函数
+
+
+
+
+这些都和Java 8直接相关。因为Java 8中，函数不仅可以作为参数传递，还可以作为结果返回，
+能赋值给本地变量，也可以插入到某个数据结构。比如，一个计算口袋的程序可能有这样的一个
+Map<String, Function<Double, Double>>，它将字符串sin映射到方法Function<Double,
+Double>，实现对Math::sin的方法引用
+
+
