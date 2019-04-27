@@ -1,0 +1,37 @@
+
+
+
+
+max 和 min 方法都属于更通用的一种编程模式。要看到这种编程模式，最简单的方法是使
+用 for 循环重写例 3-13 中的代码。例 3-14 和例 3-13 的功能一样，都是查找专辑中的最短
+曲目，但是使用了 for 循环。
+例 3-14 使用 for 循环查找最短曲目
+List<Track> tracks = asList(new Track("Bakai", 524),
+new Track("Violets for Your Furs", 378),
+new Track("Time Was", 451));
+Track shortestTrack = tracks.get(0);
+for (Track track : tracks) {
+if (track.getLength() < shortestTrack.getLength()) {
+shortestTrack = track;
+}
+}
+assertEquals(tracks.get(1), shortestTrack);
+这段代码先使用列表中的第一个元素初始化变量 shortestTrack，然后遍历曲目列表，如果
+找到更短的曲目，则更新 shortestTrack，最后变量 shortestTrack 保存的正是最短曲目。
+程序员们无疑已写过成千上万次这样的 for 循环，其中很多都属于这个模式。例 3-15 中的
+伪代码体现了通用模式的特点。
+例 3-15 reduce 模式
+Object accumulator = initialValue;
+for(Object element : collection) {
+accumulator = combine(accumulator, element);
+}
+首先赋给 accumulator 一个初始值：initialValue，然后在循环体中，通过调用 combine 函
+数，拿 accumulator 和集合中的每一个元素做运算，再将运算结果赋给 accumulator，最后
+accumulator 的值就是想要的结果。
+这个模式中的两个可变项是 initialValue 初始值和 combine 函数。在例 3-14 中，我们选列
+表中的第一个元素为初始值，但也不必需如此。为了找出最短曲目，combine 函数返回当
+前元素和 accumulator 中较短的那个
+
+
+
+
