@@ -15,7 +15,7 @@ public class Album {
 
     List<Track> tracks;
 
-    List<Artist> musicians;
+    Artist musicians;
 
 
     public String getName() {
@@ -26,7 +26,8 @@ public class Album {
         return tracks;
     }
 
-    public List<Artist> getMusicians() {
+
+    public Artist getMusicians() {
         return musicians;
     }
 }

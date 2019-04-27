@@ -6,5 +6,6 @@ public class Data {
 
     public static List<Artist> artists;
 
+    public static Album album;
 
 }
