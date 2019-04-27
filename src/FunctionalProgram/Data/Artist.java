@@ -13,7 +13,7 @@ public class Artist {
 
     String origin;
 
-    String members;
+    int members;
 
     public String getName() {
         return name;
@@ -23,7 +23,7 @@ public class Artist {
         return origin;
     }
 
-    public String getMembers() {
+    public int getMembers() {
         return members;
     }
 }
