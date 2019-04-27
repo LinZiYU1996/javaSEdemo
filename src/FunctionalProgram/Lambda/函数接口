@@ -1,0 +1,35 @@
+
+
+
+
+函数接口是只有一个抽象方法的接口，用作 Lambda 表达式的类型
+
+
+在 Java 里，所有方法参数都有固定的类型。假设将数字 3 作为参数传给一个方法，则参数
+的类型是 int。那么，Lambda 表达式的类型又是什么呢？
+使用只有一个方法的接口来表示某特定方法并反复使用，是很早就有的习惯。使用 Swing
+编写过用户界面的人对这种方式都不陌生，例 2-2 中的用法也是如此。这里无需再标新立
+异，Lambda 表达式也使用同样的技巧，并将这种接口称为函数接口。
+
+
+
+public interface ActionListener extends EventListener {
+            public void actionPerformed(ActionEvent event);
+}
+
+
+ActionListener 只有一个抽象方法：actionPerformed，被用来表示行为：接受一个参数，
+返回空。记住，由于 actionPerformed 定义在一个接口里，因此 abstract 关键字不是必需
+的。该接口也继承自一个不具有任何方法的父接口：EventListener。
+这就是函数接口，接口中单一方法的命名并不重要，只要方法签名和 Lambda 表达式的类
+型匹配即可。可在函数接口中为参数起一个有意义的名字，增加代码易读性，便于更透彻
+地理解参数的用途。
+这里的函数接口接受一个 ActionEvent 类型的参数，返回空（void），但函数接口还可有其
+他形式。例如，函数接口可以接受两个参数，并返回一个值，还可以使用泛型，这完全取
+决于你要干什么。
+
+
+
+
+
+

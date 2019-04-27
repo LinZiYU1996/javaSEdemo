@@ -30,7 +30,7 @@ public class TestCopy3 {
 
         S_2 s_2 = new S_2();
         s_2.setAddress(address);
-        s_2.setNumber(555);
+        s_2.setNumber(999);
 
         S_2 s_21 = (S_2) s_2.clone();
 
