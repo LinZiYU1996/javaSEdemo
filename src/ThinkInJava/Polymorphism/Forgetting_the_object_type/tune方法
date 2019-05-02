@@ -1,0 +1,15 @@
+
+
+
+
+
+public static void tune(lnstrument i) {
+
+i.play(Note.MlDDLE C);
+
+}
+
+它接受一个Instrument引用。那么在这种情况下，
+编译器怎样才能知道这个Instrument引用指向的是Wind对象，
+而不是Brass对象或Stringed对象呢？实际上，编译器无法得知
+。为了深入理解这个问题，有必要研究一下绑定这个话题
