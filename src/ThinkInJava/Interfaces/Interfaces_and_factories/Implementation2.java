@@ -1,0 +1,15 @@
+package ThinkInJava.Interfaces.Interfaces_and_factories;
+
+/**
+ * @Author: Mr.Lin
+ * @Description:
+ * @Date: Create in 9:43 2019/5/6
+ */
+public class Implementation2 implements Service{
+
+    Implementation2() {} // Package access
+    public void method1() {System.out.println("Implementation2 method1");}
+    public void method2() {System.out.println("Implementation2 method2");}
+
+
+}

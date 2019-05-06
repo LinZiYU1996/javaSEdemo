@@ -10,8 +10,10 @@ public interface E {
         void f();
     }
     void g();
+
+
     // Cannot be private within an interface:
     //! private interface I {}
-
+    //内部接口不能定义为private
 
 }
