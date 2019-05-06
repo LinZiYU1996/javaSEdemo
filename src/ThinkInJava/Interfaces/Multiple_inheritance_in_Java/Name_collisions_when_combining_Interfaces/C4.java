@@ -12,3 +12,9 @@ public class C4 extends C implements I3{
 }
 //在打算组合的不同接口中使用相同的方法名通常会造成代码可读性的混乱，请尽量避免这种情况。
 
+
+
+
+
+
+
