@@ -1,0 +1,19 @@
+
+
+
+
+
+LinkedList也像ArrayList一样实现了基本的List接口，
+但是它执行某些操作（在List的中间插人和移除）时比ArrayList更高效，
+但在随机访间操作方面却要逊色一些。
+
+
+LinkedList还添加了可以使其用作栈队列或双端队列的方法。
+
+这些方法中有些彼此之间只是名称有些差异，或者只存在些许差异，以使得这些名字在特
+定用法的上下文环境中更加适用（特别是在Queue中）。例如，getFirst()和element()完全一样，
+压＠它们都返回列表的头（第一个元素），而并不移除它，如果List为空，则抛出NoSuchElement­
+
+removeFirstO与removeO也是完全一样的，它们移除并返回列表的头，
+而在列表为空时抛出 NoSuchElementException. poll()稍有差异，
+它在列表为空时返回nuU。
