@@ -14,7 +14,7 @@ package ThinkInJava.Inner_Classes.Usingthisandnew;
  */
 public class Parcel3 {
 
-    class Contents {
+    public class Contents {
         private int i = 11;
         public int value() { return i; }
     }

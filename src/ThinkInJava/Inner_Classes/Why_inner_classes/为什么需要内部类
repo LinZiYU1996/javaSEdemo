@@ -1,0 +1,84 @@
+
+
+
+一般说来，内部类继承自某个类或实现某个接口，内部类的代码操作创建它的外围类的对象。所以可以认为内部类提供了
+某种进入其外围类的窗口
+。
+内部类必须要回答的一个问题是
+：如果只是需要一个对接口的引用，为什么不通过外围类实现那个接口呢？答案是：“如果这能满足蒂求，
+那么就应该这样做。“那么内部类实现一个接口与外围类实现这个接口有什么区别呢？答案是：后者不是总能享用
+到接口带来的方便，有时需要用到接口的实现。所以，使用内部类最吸引入的原因是：
+每个内部类都能独立地继承自一个（接口的）实现，所以无论外国类是否已经继承了某个 （接口的）实现，对于
+内部类都没有影响。
+如果没有内部类提供的、可以继承多个具体的或抽象的类的能力，一些设计与编程问题就很难解决。从这个角度看，
+内部类使得多重继承的解决方案变得完整。接口解决了部分问题， 而内部类有效地实现了“多重继承＂。也就是
+
+
+）。
+为了看到更多的细节，让我们考虑这样一种情形：即必须在一个类中以
+
+interface A {}
+interface B {}
+class X implements A, B {}
+class Y implements A {
+ B makeB() {
+ // Anonymous inner class:
+ return new B() {};
+ }
+}
+public class MultiInterfaces {
+ static void takesA(A a) {}
+ static void takesB(B b) {}
+ public static void main(String[] args) {
+ X x = new X();
+ Y y = new Y();
+ takesA(x);
+ takesA(y);
+ takesB(x);
+ takesB(y.makeB());
+ }
+} ///:~
+
+
+如果拥有的是抽象的类或具体的类，而不是接口，那就只能使用内部类才能实现多重继承。
+
+class D {}
+
+
+
+abstract class E {}
+class Z extends D {
+ E makeE() { return new E() {}; }
+}
+public class MultiImplementation {
+ static void takesD(D d) {}
+ static void takesE(E e) {}
+ public static void main(String[] args) {
+ Z z = new Z();
+ takesD(z);
+ takesE(z.makeE());
+ }
+} ///:~
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
