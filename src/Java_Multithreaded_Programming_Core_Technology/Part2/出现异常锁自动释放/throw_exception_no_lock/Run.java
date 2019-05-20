@@ -1,0 +1,34 @@
+package Java_Multithreaded_Programming_Core_Technology.Part2.出现异常锁自动释放.throw_exception_no_lock;
+
+/**
+ * @Author: Mr.Lin
+ * @Description:
+ *
+ * 当一个线程执行的代码出现异常时，其所持有的锁会自动释放。
+ *
+ *
+ * @Date: Create in 11:41 2019/5/20
+ */
+public class Run {
+
+    public static void main(String[] args) {
+        try {
+            /**
+             * 出现异常，锁自动释放
+             * 也就是说，如果synchronized方法内部抛出异常，或得的锁会自动释放，继续后续调用。
+             */
+            Service service = new Service();
+            ThreadA aThread = new ThreadA(service);
+            ThreadB bThread = new ThreadB(service);
+            aThread.setName("a");
+            aThread.start();
+            Thread.sleep(5000);
+            bThread.setName("b");
+            bThread.start();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+}
