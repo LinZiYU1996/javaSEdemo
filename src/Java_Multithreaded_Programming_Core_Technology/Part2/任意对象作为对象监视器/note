@@ -1,0 +1,25 @@
+
+
+
+
+说明synchronized同步方法或synchronized(this)同步代码块分别有两种作用。 (1) synchronized同步方法
+I)对其他synchronized同步方法或synchronized(this)同步代码块调用呈阻塞状态。 2)同一时间只有一个线程可以执行synchronized同步方法中的代码。
+(2) synchronized(this)同步代码块
+l)对其他synchronized同步方法或synchronized(this)同步代码块调用呈阻塞状态。
+
+
+2) 一时间只有一个线程可以执行syncbronized(this)同步代码块中的代码。
+
+其实Java还支持对 “任意 对象” 作为 “对象监视器” 来实现同步的功能。
+这个 “ 任意对象” 大多数是实例变量及方法 的参数，使用格式为synchronized(非this对象）。
+根据前面对synchronized(this)同步代码块的作用总结可知， synchronized(非如s对象） 格式
+的作用只有1种： synchronized(非this对象x)同步代码块。
+I)在多个线程持有 “对象监视器” 为同一个对象的前提下， 同一时间只有一个线程可 以执
+行synchronized(非this对象x)同步代码块中的代码。
+
+2)当待有 “对象监视器” 为同 一个对象的前提下 ， 同一时间只有一个线程可以执行
+synchronized(非伽s对象x)同步代码块中的代码。
+
+
+
+
