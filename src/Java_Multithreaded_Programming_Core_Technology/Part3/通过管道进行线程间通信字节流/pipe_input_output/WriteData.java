@@ -17,9 +17,11 @@ public class WriteData {
                 String outData = "" + (i + 1);
                 out.write(outData.getBytes());
                 System.out.print(outData);
-                System.out.println("====================================");
             }
             System.out.println();
+            System.out.println("====================================");
+
+
             out.close();
         } catch (IOException e) {
             e.printStackTrace();
