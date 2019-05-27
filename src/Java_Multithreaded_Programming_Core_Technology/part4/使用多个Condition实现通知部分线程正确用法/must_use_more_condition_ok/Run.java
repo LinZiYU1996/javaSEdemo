@@ -24,5 +24,8 @@ public class Run {
         b.start();
         Thread.sleep(3000);
         service.signalAll_A();
+
+
+
     }
 }
