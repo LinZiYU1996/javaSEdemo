@@ -14,6 +14,8 @@ public class Service {
 
     private ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 
+
+
     public void read() {
         try {
             try {
